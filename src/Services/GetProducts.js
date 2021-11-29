@@ -10,6 +10,11 @@ const Product = async (id) => {
     return response.data
 }
 
+const addProduct = async (data) => {
+    const response = await axios.post('http://localhost:5000/backend/add-product', data)
+    return response.data
+}
+
 export { 
-    Products, Product
+    Products, Product, addProduct
 }
