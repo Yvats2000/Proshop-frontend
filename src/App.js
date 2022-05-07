@@ -7,6 +7,8 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import LoginScreen from "./screens/LoginScreen";
 import ProductForm from "./component/ProductForm";
+import ProForm from "./screens/proForm";
+import talkToExport from "./screens/talkToExport";
 
 
 
@@ -21,7 +23,8 @@ function App() {
             <Route path='/' exact component={HomeScreen } />
             <Route path='/product/:id' exact component={ProductScreen } />
             <Route path='/addproduct' exact component={ProductForm } />
-            {/* <Route path='/product/:id' render={(props) => <ProductScreen {...props} />} /> */}
+            <Route path='/addpro' exact component={ProForm} />
+            <Route path='/talkToExport' exact component={talkToExport} />
           </Switch>
 
         </Container>

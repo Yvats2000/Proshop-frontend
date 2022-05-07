@@ -15,6 +15,11 @@ const addProduct = async (data) => {
     return response.data
 }
 
+const removeproduct = async (data) => {
+    const response = await axios.post('http://localhost:5000/backend/deleteProduct', data)
+    console.log(response,'dfsddsf')
+    return response.data
+}
 export { 
-    Products, Product, addProduct
+    Products, Product, addProduct, removeproduct
 }

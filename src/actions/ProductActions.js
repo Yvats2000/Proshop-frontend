@@ -6,9 +6,7 @@ import { PRODUCT_LIST_REQUEST,
         PRODUCT_DETAILS_SUCCESS,
         PRODUCT_DETAILS_FAIL} from '../constants/ProductConstants'
 
-import {Products, Product, addProduct} from '../Services/GetProducts';
-
-
+import {Products, Product, addProduct, removeproduct} from '../Services/GetProducts';
 
 
 export const listProducts = () => async (dispatch) => {
@@ -30,12 +28,30 @@ export const listProducts = () => async (dispatch) => {
     }
 }
 
+export const deleteProductAction = (data) => async (dispatch) => {
+    try{
+        dispatch({type: 'DELETE_PRODUCT_REQUEST'})
+        const response = await removeproduct(data)
+         console.log(response);
+         if(response.status){
+            dispatch({
+                type: 'DELETE_PRODUCT',
+                payload: data.id
+            })
+         }
+       
+    } catch(error){
+        console.log(error)
+    }
+}
+
 export const listProductDetails = (id) => async (dispatch) => {
     try {
         // console.log(id,'yoyo')
         dispatch({type: PRODUCT_DETAILS_REQUEST})
         const {product} = await Product(id);
     // console.log(product)
+    console.log(product)
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
             payload: product,
@@ -57,8 +73,9 @@ export const addProductDetails = (data) => async (dispatch) => {
     // console.log(product)
         dispatch({
             type: "ADDPRODUCT_DETAILS_SUCCESS",
-            payload: product,
+            payload: data,
         })
+        dispatch(listProductDetails(data.id))
     } catch (error) {
         dispatch({
             type: "ADDPRODUCT_DETAILS_FAIL",

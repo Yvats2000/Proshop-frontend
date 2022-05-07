@@ -9,13 +9,20 @@ export const productListReducer = (state = { products: [] }, action) => {
     switch (action.type) {
         case PRODUCT_LIST_REQUEST : 
             return { loading: true, products: [] }
+
         case PRODUCT_LIST_SUCCESS : 
             return { loading: false, products: action.payload }
+
         case PRODUCT_LIST_FAIL : 
             return { loading: false, error: action.payload }
+
         case "ADDPRODUCT_DETAILS_SUCCESS": 
-        // console.log(state.products,'vivi')
             return { loading: false, products: [...state.products, action.payload] }
+
+        case 'DELETE_PRODUCT':
+            let newproducts=state.products.filter((data)=>data._id!==action.payload)  // jo id match ho rhi h usko chd kr baaki saare return kre
+            return { loading: false, products:newproducts }
+
         default:
             return state
     }
@@ -25,11 +32,14 @@ export const productDetailsReducer = (state = { product: {reviews : [] } }, acti
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST : 
             return { loading: true, ...state }
+
         case PRODUCT_DETAILS_SUCCESS : 
-        // console.log(action.payload)
+            console.log(action.payload)
             return { loading: false, product: action.payload }
+
         case PRODUCT_DETAILS_FAIL : 
             return { loading: false, error: action.payload }
+
         default:
             return state
     }
